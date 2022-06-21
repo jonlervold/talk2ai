@@ -24,6 +24,19 @@ const useAiRequest = () => {
 
   const dateTime = new Date();
 
+  const [options, setOptions] = useState({
+    model: 'text-davinci-002',
+    temperature: 1,
+    maxTokens: 256,
+    frequencyPenalty: 0,
+    presencePenalty: 0,
+  });
+
+  const handleOptions = (setting: string, value: string | number) => {
+    const newOptions = { ...options, [setting]: value };
+    setOptions(newOptions);
+  };
+
   const handleSubmit = async () => {
     setIsLoading(true);
     const response = await getAi(input, key);
@@ -43,6 +56,8 @@ const useAiRequest = () => {
     handleInput,
     key,
     handleKey,
+    options,
+    handleOptions,
     output,
     isLoading,
     handleSubmit,

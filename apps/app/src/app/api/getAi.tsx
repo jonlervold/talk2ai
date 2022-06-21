@@ -7,7 +7,7 @@ const getAi = async (input: string, key: string) => {
   const openai = new OpenAIApi(configuration);
 
   const response = await openai.createCompletion({
-    model: 'text-davinci-002',
+    model: 'text-ada-001',
     prompt: input,
     temperature: 0.7,
     max_tokens: 256,
