@@ -3,6 +3,7 @@ import { FC } from 'react';
 import getMaxCost from '../util/getMaxCost';
 
 const Wrapper = styled.div`
+  background-color: #e4e4e4;
   display: inline-block;
   width: 90%;
   margin-left: auto;
@@ -27,15 +28,24 @@ type Props = {
   };
   handleOptions: (setting: string, value: string | number) => void;
   showOptionDescriptions: boolean;
+  handleShowOptionDescriptions: () => void;
 };
 
 const Options: FC<Props> = ({
   options,
   handleOptions,
   showOptionDescriptions,
+  handleShowOptionDescriptions,
 }) => {
   return (
     <Wrapper>
+      <div>
+        <button onClick={handleShowOptionDescriptions}>
+          {showOptionDescriptions
+            ? 'Hide Option Descriptions'
+            : 'Show Option Descriptions'}
+        </button>
+      </div>
       <Option>
         <span>Model</span>
 

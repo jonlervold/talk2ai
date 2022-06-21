@@ -19,9 +19,20 @@ export function App() {
     isLoading,
     handleSubmit,
     handleClearHistory,
+    handleRemoveHistoryItem,
   } = useAiRequest();
 
+  // create hook
   const [showOptionDescriptions, setShowOptionDescriptions] = useState(false);
+  const handleShowOptionDescriptions = () => {
+    setShowOptionDescriptions(!showOptionDescriptions);
+  };
+  const [showOptions, setShowOptions] = useState('options-hidden');
+  const handleShowOptions = () => {
+    if (showOptions === 'options-hidden') {
+      setShowOptions('options-visible');
+    } else setShowOptions('options-hidden');
+  };
 
   return (
     <Container>
@@ -31,18 +42,17 @@ export function App() {
         <input type="password" value={key} onChange={(e) => handleKey(e)} />
       </div>
       <div>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</div>
-      <Options
-        options={options}
-        handleOptions={handleOptions}
-        showOptionDescriptions={showOptionDescriptions}
-      />
-      <button
-        onClick={() => setShowOptionDescriptions(!showOptionDescriptions)}
-      >
-        {showOptionDescriptions
-          ? 'Hide Option Descriptions'
-          : 'Show Option Descriptions'}
+      <button onClick={handleShowOptions}>
+        {showOptions === 'options-visible' ? 'Hide Options' : 'Show Options'}
       </button>
+      <div id={showOptions}>
+        <Options
+          options={options}
+          handleOptions={handleOptions}
+          showOptionDescriptions={showOptionDescriptions}
+          handleShowOptionDescriptions={handleShowOptionDescriptions}
+        />
+      </div>
       <textarea value={input} onChange={(e) => handleInput(e)}></textarea>{' '}
       <div>
         <button disabled={isLoading} onClick={handleSubmit}>
@@ -58,7 +68,7 @@ export function App() {
             {instance.query}
           </div>
           <div className="response">
-            <div className="header">Response</div>
+            <div className="header">Response -leading remove newlines-</div>
             {instance.response}
           </div>
 
@@ -100,6 +110,9 @@ export function App() {
               </tr>
             </tbody>
           </table>
+          <button onClick={() => handleRemoveHistoryItem(index)}>
+            Remove from History
+          </button>
         </Card>
       ))}
       <div>

@@ -77,6 +77,12 @@ const useAiRequest = () => {
     setOutput([]);
   };
 
+  const handleRemoveHistoryItem = (index: number) => {
+    const newOutput = [...output];
+    newOutput.splice(index, 1);
+    setOutput(newOutput);
+  };
+
   return {
     input,
     handleInput,
@@ -88,6 +94,7 @@ const useAiRequest = () => {
     isLoading,
     handleSubmit,
     handleClearHistory,
+    handleRemoveHistoryItem,
   };
 };
 

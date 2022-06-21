@@ -16,6 +16,13 @@ const Container = styled.div`
     width: 90%;
     height: 3in;
   }
+  #options-hidden {
+    visibility: hidden;
+    height: 0;
+  }
+  #options-visible {
+    //
+  }
 `;
 
 export default Container;
