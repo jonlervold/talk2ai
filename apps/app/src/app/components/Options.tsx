@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import getMaxCost from '../util/getMaxCost';
 
 type Props = {
   options: {
@@ -20,7 +21,7 @@ const Options: FC<Props> = ({ options, handleOptions }) => {
           value={options.model}
           onChange={(e) => handleOptions('model', e.target.value)}
         >
-          <option value="text-davinci002">DaVinci</option>
+          <option value="text-davinci-002">DaVinci</option>
           <option value="text-curie-001">Curie</option>
           <option value="text-babbage-001">Babbage</option>
           <option value="text-ada-001">Ada</option>
@@ -44,9 +45,10 @@ const Options: FC<Props> = ({ options, handleOptions }) => {
           onChange={(e) => handleOptions('maxTokens', e.target.value)}
           type="range"
           min="100"
-          max="999"
+          max="2048"
         />{' '}
         {options.maxTokens}
+        <div>Max Cost: ~${getMaxCost(options.model, options.maxTokens)}</div>
       </div>
       <div>
         Frequency Penalty:{' '}
@@ -84,3 +86,6 @@ export default Options;
 //     classification, address correction, keywords
 
 // temperature - higher is more creative
+
+// frequency_penalty: 0 (-2 - 2, higher value means less likely to repeat)
+// presence_penalty: 0 (-2 to 2, higher value means more likely to move on to new topics)

@@ -17,6 +17,12 @@ const useAiRequest = () => {
       timestamp: Date;
       query: string;
       response: string | undefined;
+      model: string;
+      temperature: number;
+      maxTokens: number;
+      frequencyPenalty: number;
+      presencePenalty: number;
+      stopReason: string | undefined;
     }[]
   >([]);
 
@@ -26,11 +32,13 @@ const useAiRequest = () => {
 
   const [options, setOptions] = useState({
     model: 'text-davinci-002',
-    temperature: 1,
+    temperature: 70,
     maxTokens: 256,
     frequencyPenalty: 0,
     presencePenalty: 0,
   });
+
+  console.log(options);
 
   const handleOptions = (setting: string, value: string | number) => {
     const newOptions = { ...options, [setting]: value };
@@ -39,12 +47,26 @@ const useAiRequest = () => {
 
   const handleSubmit = async () => {
     setIsLoading(true);
-    const response = await getAi(input, key);
+    const response = await getAi(
+      input,
+      key,
+      options.model,
+      Number(options.temperature / 100),
+      Number(options.maxTokens),
+      Number(options.frequencyPenalty),
+      Number(options.presencePenalty)
+    );
     if (response.data.choices !== undefined) {
       const thisQuery = {
         timestamp: dateTime,
         query: input,
         response: response.data.choices[0].text,
+        model: options.model,
+        temperature: options.temperature / 100,
+        maxTokens: options.maxTokens,
+        frequencyPenalty: options.frequencyPenalty,
+        presencePenalty: options.presencePenalty,
+        stopReason: response.data.choices[0].finish_reason,
       };
       setOutput([thisQuery, ...output]);
     }

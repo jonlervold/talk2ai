@@ -2,6 +2,8 @@ import Options from './components/Options';
 import Card from './components/styles/Card';
 import Container from './components/styles/Container';
 import useAiRequest from './hooks/useAiRequest';
+import getEstimatedCost from './util/getEstimatedCost';
+import getMaxCost from './util/getMaxCost';
 
 export function App() {
   const {
@@ -41,7 +43,28 @@ export function App() {
             <div className="header">Response</div>
             {instance.response}
           </div>
-          <div>Finish Reason: {}</div>
+          <div>Model: {instance.model}</div>
+          <div>Temperature: {instance.temperature}</div>
+          <div>Frequency Penalty: {instance.frequencyPenalty}</div>
+          <div>Presence Penalty: {instance.presencePenalty}</div>
+          <div>Stop Reason: {instance.stopReason}</div>
+          <div>Max Tokens: {instance.maxTokens}</div>
+          <div>
+            Max Cost: ~${getMaxCost(instance.model, instance.maxTokens)}
+          </div>
+          <div>
+            Estimated Tokens:{' '}
+            {instance.response !== undefined &&
+              instance.query.length + instance.response.length / 4}
+          </div>
+          <div>
+            Estimated Cost: ~$
+            {instance.response !== undefined &&
+              getEstimatedCost(
+                instance.model,
+                instance.query.length + instance.response.length / 4
+              )}
+          </div>
         </Card>
       ))}
       {/* <div>
@@ -50,7 +73,7 @@ export function App() {
         max_tokens: 256, 
         frequency_penalty: 0 (-2 - 2, higher value means less likely to repeat)
         presence_penalty: 0 (-2 to 2, higher value means more likely to move on to new topics)
-        - input bar for api key
+
       </div> */}
     </Container>
   );
