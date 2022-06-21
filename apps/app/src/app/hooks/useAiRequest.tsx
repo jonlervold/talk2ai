@@ -73,6 +73,10 @@ const useAiRequest = () => {
     setIsLoading(false);
   };
 
+  const handleClearHistory = () => {
+    setOutput([]);
+  };
+
   return {
     input,
     handleInput,
@@ -83,6 +87,7 @@ const useAiRequest = () => {
     output,
     isLoading,
     handleSubmit,
+    handleClearHistory,
   };
 };
 

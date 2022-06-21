@@ -4,6 +4,8 @@ import Container from './components/styles/Container';
 import useAiRequest from './hooks/useAiRequest';
 import getEstimatedCost from './util/getEstimatedCost';
 import getMaxCost from './util/getMaxCost';
+import './app.css';
+import { useState } from 'react';
 
 export function App() {
   const {
@@ -16,21 +18,37 @@ export function App() {
     output,
     isLoading,
     handleSubmit,
+    handleClearHistory,
   } = useAiRequest();
+
+  const [showOptionDescriptions, setShowOptionDescriptions] = useState(false);
 
   return (
     <Container>
       <h1>TALK2AI</h1>
       <div>
-        API KEY
+        Key
         <input type="password" value={key} onChange={(e) => handleKey(e)} />
       </div>
       <div>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</div>
-      <Options options={options} handleOptions={handleOptions} />
-      <textarea value={input} onChange={(e) => handleInput(e)}></textarea>{' '}
-      <button disabled={isLoading} onClick={handleSubmit}>
-        {isLoading ? 'Loading...' : 'Submit'}
+      <Options
+        options={options}
+        handleOptions={handleOptions}
+        showOptionDescriptions={showOptionDescriptions}
+      />
+      <button
+        onClick={() => setShowOptionDescriptions(!showOptionDescriptions)}
+      >
+        {showOptionDescriptions
+          ? 'Hide Option Descriptions'
+          : 'Show Option Descriptions'}
       </button>
+      <textarea value={input} onChange={(e) => handleInput(e)}></textarea>{' '}
+      <div>
+        <button disabled={isLoading} onClick={handleSubmit}>
+          {isLoading ? 'Loading...' : 'Submit'}
+        </button>
+      </div>
       {output.map((instance, index) => (
         <Card>
           <div className="header">{output.length - index}</div>
@@ -43,38 +61,52 @@ export function App() {
             <div className="header">Response</div>
             {instance.response}
           </div>
-          <div>Model: {instance.model}</div>
-          <div>Temperature: {instance.temperature}</div>
-          <div>Frequency Penalty: {instance.frequencyPenalty}</div>
-          <div>Presence Penalty: {instance.presencePenalty}</div>
-          <div>Stop Reason: {instance.stopReason}</div>
-          <div>Max Tokens: {instance.maxTokens}</div>
-          <div>
-            Max Cost: ~${getMaxCost(instance.model, instance.maxTokens)}
-          </div>
-          <div>
-            Estimated Tokens:{' '}
-            {instance.response !== undefined &&
-              instance.query.length + instance.response.length / 4}
-          </div>
-          <div>
-            Estimated Cost: ~$
-            {instance.response !== undefined &&
-              getEstimatedCost(
-                instance.model,
-                instance.query.length + instance.response.length / 4
-              )}
-          </div>
+
+          <table>
+            <tbody>
+              <tr>
+                <td>Model</td>
+                <td>{instance.model}</td>
+                <td>Stop Reason</td>
+                <td>{instance.stopReason}</td>
+                <td>Temperature</td>
+                <td>{instance.temperature}</td>
+              </tr>
+              <tr>
+                <td>Max Tokens</td>
+                <td>{instance.maxTokens}</td>
+                <td>Estimated Tokens</td>
+                <td>
+                  {instance.response !== undefined &&
+                    instance.query.length + instance.response.length / 4}
+                </td>
+                <td>Frequency Penalty</td>
+                <td>{instance.frequencyPenalty}</td>
+              </tr>
+              <tr>
+                <td>Max Cost</td>
+                <td>~${getMaxCost(instance.model, instance.maxTokens)}</td>
+                <td>Estimated Cost</td>
+                <td>
+                  ~$
+                  {instance.response !== undefined &&
+                    getEstimatedCost(
+                      instance.model,
+                      instance.query.length + instance.response.length / 4
+                    )}
+                </td>
+                <td>Presence Penalty</td>
+                <td>{instance.presencePenalty}</td>
+              </tr>
+            </tbody>
+          </table>
         </Card>
       ))}
-      {/* <div>
-        response.data.choices[0].finish_reason 
-        temperature: 0.7, (scale: 0 - 0.99, higher more creative)
-        max_tokens: 256, 
-        frequency_penalty: 0 (-2 - 2, higher value means less likely to repeat)
-        presence_penalty: 0 (-2 to 2, higher value means more likely to move on to new topics)
-
-      </div> */}
+      <div>
+        {output.length > 0 && (
+          <button onClick={handleClearHistory}>Clear History</button>
+        )}
+      </div>
     </Container>
   );
 }
