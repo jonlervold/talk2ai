@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
 const Card = styled.div`
+  box-sizing: border-box;
+  padding: 1rem;
   border: 1px solid black;
   background-color: #e4e4e4;
   width: 90%;
@@ -10,7 +12,7 @@ const Card = styled.div`
   text-align: left;
   table {
     width: 90%;
-    margin: 1rem;
+    margin-top: 1rem;
     border: 1px solid black;
     margin-left: auto;
     margin-right: auto;
@@ -18,23 +20,30 @@ const Card = styled.div`
     border-collapse: collapse;
   }
   td {
-    border: 1px solid black;
+    border: 1px dotted black;
   }
   th {
     font-weight: bold;
   }
-  .header {
-    font-weight: bold;
+  .table-left-line {
+    border-left: 1px solid black;
   }
   .timestamp {
-    margin: 1rem;
+    margin-top: 1rem;
   }
   .query {
-    margin: 1rem;
+    margin-top: 1rem;
   }
   .response {
-    margin: 1rem;
+    margin-top: 1rem;
     white-space: pre-line;
+  }
+  #card-number {
+    font-size: 1.25rem;
+  }
+  #remove-button {
+    margin-top: 1rem;
+    display: table;
   }
 `;
 

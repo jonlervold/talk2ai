@@ -9,6 +9,10 @@ const Wrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   border: 1px solid black;
+  #option-descriptions-toggle {
+    width: 55.4%;
+    margin: 1rem;
+  }
 `;
 
 const Option = styled.span`
@@ -40,7 +44,10 @@ const Options: FC<Props> = ({
   return (
     <Wrapper>
       <div>
-        <button onClick={handleShowOptionDescriptions}>
+        <button
+          id="option-descriptions-toggle"
+          onClick={handleShowOptionDescriptions}
+        >
           {showOptionDescriptions
             ? 'Hide Option Descriptions'
             : 'Show Option Descriptions'}

@@ -61,14 +61,16 @@ export function App() {
       </div>
       {output.map((instance, index) => (
         <Card>
-          <div className="heading">{output.length - index}</div>
+          <div id="card-number" className="heading">
+            {output.length - index}
+          </div>
           <div className="timestamp">{instance.timestamp.toLocaleString()}</div>
           <div className="query">
             <div className="heading">Query</div>
             {instance.query}
           </div>
           <div className="response">
-            <div className="heading">Response -leading remove newlines-</div>
+            <div className="heading">Response -remove leading newlines-</div>
             {instance.response}
           </div>
 
@@ -77,26 +79,26 @@ export function App() {
               <tr>
                 <td className="heading">Model</td>
                 <td>{instance.model}</td>
-                <td className="heading">Stop Reason</td>
+                <td className="heading table-left-line">Stop Reason</td>
                 <td>{instance.stopReason}</td>
-                <td className="heading">Temperature</td>
+                <td className="heading table-left-line">Temperature</td>
                 <td>{instance.temperature}</td>
               </tr>
               <tr>
                 <td className="heading">Max Tokens</td>
                 <td>{instance.maxTokens}</td>
-                <td className="heading">Estimated Tokens</td>
+                <td className="heading table-left-line">Estimated Tokens</td>
                 <td>
                   {instance.response !== undefined &&
                     instance.query.length + instance.response.length / 4}
                 </td>
-                <td className="heading">Frequency Penalty</td>
+                <td className="heading table-left-line">Frequency Penalty</td>
                 <td>{instance.frequencyPenalty}</td>
               </tr>
               <tr>
                 <td className="heading">Max Cost</td>
                 <td>~${getMaxCost(instance.model, instance.maxTokens)}</td>
-                <td className="heading">Estimated Cost</td>
+                <td className="heading table-left-line">Estimated Cost</td>
                 <td>
                   ~$
                   {instance.response !== undefined &&
@@ -105,12 +107,15 @@ export function App() {
                       instance.query.length + instance.response.length / 4
                     )}
                 </td>
-                <td className="heading">Presence Penalty</td>
+                <td className="heading table-left-line">Presence Penalty</td>
                 <td>{instance.presencePenalty}</td>
               </tr>
             </tbody>
           </table>
-          <button onClick={() => handleRemoveHistoryItem(index)}>
+          <button
+            id="remove-button"
+            onClick={() => handleRemoveHistoryItem(index)}
+          >
             Remove from History
           </button>
         </Card>
