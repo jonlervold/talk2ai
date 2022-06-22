@@ -51,7 +51,15 @@ export function App() {
           handleShowOptionDescriptions={handleShowOptionDescriptions}
         />
       </div>
-      <textarea value={input} onChange={(e) => handleInput(e)}></textarea>{' '}
+      <textarea value={input} onChange={(e) => handleInput(e)}></textarea>
+      <div>
+        <button
+          disabled={isLoading || input.length < 1 || key.length < 1}
+          onClick={handleSubmit}
+        >
+          {isLoading ? 'Loading...' : 'Submit'}
+        </button>
+      </div>
       <div>
         <button
           id="clear-input-button"
@@ -59,14 +67,6 @@ export function App() {
           disabled={input.length < 1}
         >
           Clear
-        </button>
-      </div>
-      <div>
-        <button
-          disabled={isLoading || input.length < 1 || key.length < 1}
-          onClick={handleSubmit}
-        >
-          {isLoading ? 'Loading...' : 'Submit'}
         </button>
       </div>
       <History

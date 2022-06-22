@@ -1,5 +1,9 @@
 import { useState } from 'react';
 import getAi from '../api/getAi';
+import HistoryEntry from '../types/HistoryEntry';
+import getEstimatedCost from '../util/getEstimatedCost';
+import getMaxCost from '../util/getMaxCost';
+import getModelShortName from '../util/getModelShortName';
 import removeLeadingNewlines from '../util/removeLeadingNewlines';
 
 const useAiRequest = () => {
@@ -16,19 +20,7 @@ const useAiRequest = () => {
     setKey(e.currentTarget.value);
   };
 
-  const [output, setOutput] = useState<
-    {
-      timestamp: Date;
-      query: string;
-      response: string | undefined;
-      model: string;
-      temperature: number;
-      maxTokens: number;
-      frequencyPenalty: number;
-      presencePenalty: number;
-      stopReason: string | undefined;
-    }[]
-  >([]);
+  const [output, setOutput] = useState<HistoryEntry[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -58,17 +50,26 @@ const useAiRequest = () => {
       Number(options.frequencyPenalty),
       Number(options.presencePenalty)
     );
+    let responseLength = 0;
     if (response.data.choices !== undefined) {
+      if (response.data.choices[0].text !== undefined) {
+        responseLength = response.data.choices[0].text.length;
+      }
       const thisQuery = {
         timestamp: dateTime,
         query: input,
         response: removeLeadingNewlines(response.data.choices[0].text),
-        model: options.model,
+        model: getModelShortName(options.model),
         temperature: options.temperature / 100,
         maxTokens: options.maxTokens,
         frequencyPenalty: options.frequencyPenalty,
         presencePenalty: options.presencePenalty,
         stopReason: response.data.choices[0].finish_reason,
+        maxCost: getMaxCost(options.model, options.maxTokens),
+        estimatedCost: getEstimatedCost(
+          options.model,
+          input.length + responseLength / 4
+        ),
       };
       setOutput([thisQuery, ...output]);
     }

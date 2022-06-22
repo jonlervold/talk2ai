@@ -8,6 +8,8 @@ type HistoryEntry = {
   frequencyPenalty: number;
   presencePenalty: number;
   stopReason: string | undefined;
+  maxCost: string;
+  estimatedCost: string;
 };
 
 export default HistoryEntry;
