@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import getAi from '../api/getAi';
+import removeLeadingNewlines from '../util/removeLeadingNewlines';
 
 const useAiRequest = () => {
   const [input, setInput] = useState('');
   const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInput(e.currentTarget.value);
+  };
+  const handleClearInput = () => {
+    setInput('');
   };
 
   const [key, setKey] = useState('');
@@ -38,8 +42,6 @@ const useAiRequest = () => {
     presencePenalty: 0,
   });
 
-  console.log(options);
-
   const handleOptions = (setting: string, value: string | number) => {
     const newOptions = { ...options, [setting]: value };
     setOptions(newOptions);
@@ -60,7 +62,7 @@ const useAiRequest = () => {
       const thisQuery = {
         timestamp: dateTime,
         query: input,
-        response: response.data.choices[0].text,
+        response: removeLeadingNewlines(response.data.choices[0].text),
         model: options.model,
         temperature: options.temperature / 100,
         maxTokens: options.maxTokens,
@@ -86,6 +88,7 @@ const useAiRequest = () => {
   return {
     input,
     handleInput,
+    handleClearInput,
     key,
     handleKey,
     options,

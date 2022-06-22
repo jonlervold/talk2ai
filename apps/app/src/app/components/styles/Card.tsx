@@ -11,6 +11,8 @@ const Card = styled.div`
   margin-right: auto;
   text-align: left;
   table {
+    table-layout: fixed;
+    font-size: 0.75rem;
     width: 90%;
     margin-top: 1rem;
     border: 1px solid black;
@@ -19,9 +21,7 @@ const Card = styled.div`
     text-align: center;
     border-collapse: collapse;
   }
-  td {
-    border: 1px dotted black;
-  }
+
   th {
     font-weight: bold;
   }
@@ -41,9 +41,24 @@ const Card = styled.div`
   #card-number {
     font-size: 1.25rem;
   }
-  #remove-button {
+  #query-heading {
+    margin-bottom: 1rem;
+  }
+  #response-heading {
+    margin-bottom: 1rem;
+  }
+  #stop-reason-td {
+    text-transform: capitalize;
+  }
+  #export-entry-button {
     margin-top: 1rem;
     display: table;
+    width: 57.5%;
+  }
+  #remove-button {
+    margin-top: 0.33rem;
+    display: table;
+    width: 57.5%;
   }
 `;
 

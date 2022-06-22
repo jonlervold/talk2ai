@@ -2,12 +2,18 @@ import styled from '@emotion/styled';
 
 const Container = styled.div`
   text-align: center;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  textarea,
+  button {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
   button {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
   }
   textarea {
+    box-sizing: border-box;
     border: 1px solid black;
     background-color: #e4e4e4;
     margin: 1rem;
@@ -15,9 +21,23 @@ const Container = styled.div`
     margin-right: auto;
     width: 90%;
     height: 3in;
+    padding: 1rem;
   }
   .heading {
     font-weight: bold;
+  }
+  #page-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  #key-field {
+    width: 30%;
+    text-align: center;
+  }
+  #options-visibility-toggle {
+    margin-top: 1rem;
   }
   #options-hidden {
     visibility: hidden;
@@ -25,6 +45,20 @@ const Container = styled.div`
   }
   #options-visible {
     //
+  }
+  #clear-input-button {
+    margin-bottom: 0.33rem;
+  }
+  #export-history-button {
+    margin-bottom: 0.33rem;
+  }
+  #disclaimer {
+    font-size: 0.7rem;
+    width: 80%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    margin-left: auto;
+    margin-right: auto;
   }
 `;
 
