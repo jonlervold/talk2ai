@@ -1,26 +1,7 @@
-import styled from '@emotion/styled';
 import { FC } from 'react';
 import getMaxCost from '../util/getMaxCost';
-
-const Wrapper = styled.div`
-  background-color: #e4e4e4;
-  display: inline-block;
-  width: 90%;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid black;
-  #option-descriptions-toggle {
-    width: 55.4%;
-    margin: 1rem;
-  }
-`;
-
-const Option = styled.span`
-  margin: 1rem;
-  min-width: 200px;
-  display: inline-flex;
-  flex-direction: column;
-`;
+import Option from './styles/Option';
+import OptionsWrapper from './styles/OptionsWrapper';
 
 type Props = {
   options: {
@@ -42,17 +23,18 @@ const Options: FC<Props> = ({
   handleShowOptionDescriptions,
 }) => {
   return (
-    <Wrapper>
+    <OptionsWrapper>
       <div>
         <button
           id="option-descriptions-toggle"
           onClick={handleShowOptionDescriptions}
         >
-          {showOptionDescriptions
-            ? 'Hide Option Descriptions'
-            : 'Show Option Descriptions'}
+          {showOptionDescriptions ? 'Hide Descriptions' : 'Show Descriptions'}
         </button>
       </div>
+      {showOptionDescriptions && (
+        <Option>Descriptions taken verbatim from the OpenAI website.</Option>
+      )}
       <Option>
         <span className="heading">Model</span>
 
@@ -173,7 +155,7 @@ const Options: FC<Props> = ({
         )}
       </Option>
       <Option>
-        <span className="heading">Max Tokens / Max Cost</span>
+        <span className="heading">Max Tokens / Max Cost*</span>
 
         <span>
           <input
@@ -201,65 +183,8 @@ const Options: FC<Props> = ({
           </span>
         )}
       </Option>
-      {/* <div>
-        Temperature:{' '}
-        <input
-          value={options.temperature}
-          onChange={(e) => handleOptions('temperature', e.target.value)}
-          type="range"
-          min="0"
-          max="99"
-        />{' '}
-        {options.temperature / 100}
-      </div>
-      <div>
-        Max Tokens:{' '}
-        <input
-          value={options.maxTokens}
-          onChange={(e) => handleOptions('maxTokens', e.target.value)}
-          type="range"
-          min="100"
-          max="2048"
-        />{' '}
-        {options.maxTokens}
-        <div>Max Cost: ~${getMaxCost(options.model, options.maxTokens)}</div>
-      </div>
-      <div>
-        Frequency Penalty:{' '}
-        <input
-          value={options.frequencyPenalty}
-          onChange={(e) => handleOptions('frequencyPenalty', e.target.value)}
-          type="range"
-          min="-2"
-          max="2"
-        />{' '}
-        {options.frequencyPenalty}
-      </div>
-      <div>
-        Presence Penalty:{' '}
-        <input
-          value={options.presencePenalty}
-          onChange={(e) => handleOptions('presencePenalty', e.target.value)}
-          type="range"
-          min="-2"
-          max="2"
-        />{' '}
-        {options.presencePenalty}
-      </div> */}
-    </Wrapper>
+    </OptionsWrapper>
   );
 };
 
 export default Options;
-
-// -davinci - 0.06/1k - everything the others can do plus complex intent, cause and
-//     effect, creative generation, search, summarization
-//     -curie - 0.006/1k - language translation, complex classification, sentiment, summarization
-//     -babbage - 0.0012/1k - moderate classification, semantic search
-//     -ada - 0.0008/1k parsing text, simple
-//     classification, address correction, keywords
-
-// temperature - higher is more creative
-
-// frequency_penalty: 0 (-2 - 2, higher value means less likely to repeat)
-// presence_penalty: 0 (-2 to 2, higher value means more likely to move on to new topics)
