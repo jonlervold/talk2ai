@@ -9,7 +9,6 @@ const getAi = async (
   frequencyPenalty: number,
   presencePenalty: number
 ) => {
-  console.log(model, temperature, maxTokens, frequencyPenalty, presencePenalty);
   const configuration = new Configuration({
     apiKey: key,
   });
