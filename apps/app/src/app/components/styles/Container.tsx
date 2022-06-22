@@ -16,6 +16,9 @@ const Container = styled.div`
     width: 90%;
     height: 3in;
   }
+  .heading {
+    font-weight: bold;
+  }
   #options-hidden {
     visibility: hidden;
     height: 0;

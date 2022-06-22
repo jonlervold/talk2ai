@@ -20,6 +20,9 @@ const Card = styled.div`
   td {
     border: 1px solid black;
   }
+  th {
+    font-weight: bold;
+  }
   .header {
     font-weight: bold;
   }

@@ -61,42 +61,42 @@ export function App() {
       </div>
       {output.map((instance, index) => (
         <Card>
-          <div className="header">{output.length - index}</div>
+          <div className="heading">{output.length - index}</div>
           <div className="timestamp">{instance.timestamp.toLocaleString()}</div>
           <div className="query">
-            <div className="header">Query</div>
+            <div className="heading">Query</div>
             {instance.query}
           </div>
           <div className="response">
-            <div className="header">Response -leading remove newlines-</div>
+            <div className="heading">Response -leading remove newlines-</div>
             {instance.response}
           </div>
 
           <table>
             <tbody>
               <tr>
-                <td>Model</td>
+                <td className="heading">Model</td>
                 <td>{instance.model}</td>
-                <td>Stop Reason</td>
+                <td className="heading">Stop Reason</td>
                 <td>{instance.stopReason}</td>
-                <td>Temperature</td>
+                <td className="heading">Temperature</td>
                 <td>{instance.temperature}</td>
               </tr>
               <tr>
-                <td>Max Tokens</td>
+                <td className="heading">Max Tokens</td>
                 <td>{instance.maxTokens}</td>
-                <td>Estimated Tokens</td>
+                <td className="heading">Estimated Tokens</td>
                 <td>
                   {instance.response !== undefined &&
                     instance.query.length + instance.response.length / 4}
                 </td>
-                <td>Frequency Penalty</td>
+                <td className="heading">Frequency Penalty</td>
                 <td>{instance.frequencyPenalty}</td>
               </tr>
               <tr>
-                <td>Max Cost</td>
+                <td className="heading">Max Cost</td>
                 <td>~${getMaxCost(instance.model, instance.maxTokens)}</td>
-                <td>Estimated Cost</td>
+                <td className="heading">Estimated Cost</td>
                 <td>
                   ~$
                   {instance.response !== undefined &&
@@ -105,7 +105,7 @@ export function App() {
                       instance.query.length + instance.response.length / 4
                     )}
                 </td>
-                <td>Presence Penalty</td>
+                <td className="heading">Presence Penalty</td>
                 <td>{instance.presencePenalty}</td>
               </tr>
             </tbody>

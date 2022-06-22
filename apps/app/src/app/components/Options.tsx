@@ -47,7 +47,7 @@ const Options: FC<Props> = ({
         </button>
       </div>
       <Option>
-        <span>Model</span>
+        <span className="heading">Model</span>
 
         <span>
           <select
@@ -65,9 +65,9 @@ const Options: FC<Props> = ({
           <span>
             <table>
               <tr>
-                <td>Name</td>
-                <td>Cost per 1k Tokens</td>
-                <td>Strengths</td>
+                <td className="heading">Name</td>
+                <td className="heading">Cost per 1k Tokens</td>
+                <td className="heading">Strengths</td>
               </tr>
               <tr>
                 <td>DaVinci</td>
@@ -100,7 +100,7 @@ const Options: FC<Props> = ({
         )}
       </Option>
       <Option>
-        <span>Temperature</span>
+        <span className="heading">Temperature</span>
 
         <span>
           <input
@@ -123,7 +123,7 @@ const Options: FC<Props> = ({
         )}
       </Option>
       <Option>
-        <span>Frequency Penalty</span>
+        <span className="heading">Frequency Penalty</span>
 
         <span>
           <input
@@ -146,7 +146,7 @@ const Options: FC<Props> = ({
         )}
       </Option>
       <Option>
-        <span>Presence Penalty</span>
+        <span className="heading">Presence Penalty</span>
         <span>
           <input
             value={options.presencePenalty}
@@ -166,7 +166,7 @@ const Options: FC<Props> = ({
         )}
       </Option>
       <Option>
-        <span>Max Tokens / Max Cost</span>
+        <span className="heading">Max Tokens / Max Cost</span>
 
         <span>
           <input
