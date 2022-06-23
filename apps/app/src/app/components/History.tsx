@@ -1,13 +1,21 @@
 import { FC } from 'react';
 import HistoryEntry from '../types/HistoryEntry';
+import exportEntry from '../util/exportEntry';
 import Card from './styles/Card';
 
 type Props = {
   output: HistoryEntry[];
+  isLoading: boolean;
+  handleSubmit: (continueRequest?: string | undefined) => Promise<void>;
   handleRemoveHistoryItem: (index: number) => void;
 };
 
-const History: FC<Props> = ({ output, handleRemoveHistoryItem }) => {
+const History: FC<Props> = ({
+  output,
+  isLoading,
+  handleSubmit,
+  handleRemoveHistoryItem,
+}) => {
   return (
     <>
       {output.map((instance: HistoryEntry, index: number) => (
@@ -86,14 +94,29 @@ const History: FC<Props> = ({ output, handleRemoveHistoryItem }) => {
               <tr></tr>
             </tbody>
           </table>
-
-          <button id="export-entry-button">Export Entry -implement-</button>
-          <button
-            id="remove-button"
-            onClick={() => handleRemoveHistoryItem(index)}
-          >
-            Remove from History
-          </button>
+          <div id="card-bottom-buttons">
+            <button
+              id="request-continuation-button"
+              disabled={isLoading}
+              onClick={() =>
+                handleSubmit(`${instance.query}\n\n${instance.response}`)
+              }
+            >
+              Request Continuation
+            </button>
+            <button
+              onClick={() => exportEntry(instance)}
+              id="export-entry-button"
+            >
+              Export Entry
+            </button>
+            <button
+              id="remove-button"
+              onClick={() => handleRemoveHistoryItem(index)}
+            >
+              Remove from History
+            </button>
+          </div>
         </Card>
       ))}
     </>

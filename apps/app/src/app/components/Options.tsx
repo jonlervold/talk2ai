@@ -29,11 +29,15 @@ const Options: FC<Props> = ({
           id="option-descriptions-toggle"
           onClick={handleShowOptionDescriptions}
         >
-          {showOptionDescriptions ? 'Hide Descriptions' : 'Show Descriptions'}
+          {showOptionDescriptions
+            ? 'Hide Descriptions'
+            : 'Show Option Descriptions'}
         </button>
       </div>
       {showOptionDescriptions && (
-        <Option>Descriptions taken verbatim from the OpenAI website.</Option>
+        <div>
+          Descriptions and pricing* taken verbatim from the OpenAI website.
+        </div>
       )}
       <Option>
         <span className="heading">Model</span>
@@ -55,7 +59,7 @@ const Options: FC<Props> = ({
             <table>
               <tr>
                 <td className="heading">Name</td>
-                <td className="heading">Cost per 1k Tokens</td>
+                <td className="heading">Cost per 1k Tokens*</td>
                 <td className="heading">Strengths</td>
               </tr>
               <tr>
@@ -63,7 +67,7 @@ const Options: FC<Props> = ({
                 <td>$0.06</td>
                 <td>
                   Anything the other models can do, complex intent, cause and
-                  effect, creative generation, search, summarization.
+                  effect, creative generation, search, summarization
                 </td>
               </tr>
               <tr>

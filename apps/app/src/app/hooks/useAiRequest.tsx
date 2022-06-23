@@ -24,6 +24,8 @@ const useAiRequest = () => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const [error, setError] = useState<string | undefined>();
+
   const dateTime = new Date();
 
   const [options, setOptions] = useState({
@@ -39,39 +41,61 @@ const useAiRequest = () => {
     setOptions(newOptions);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (continueRequest?: string) => {
     setIsLoading(true);
-    const response = await getAi(
-      input,
-      key,
-      options.model,
-      Number(options.temperature / 100),
-      Number(options.maxTokens),
-      Number(options.frequencyPenalty),
-      Number(options.presencePenalty)
-    );
-    let responseLength = 0;
-    if (response.data.choices !== undefined) {
-      if (response.data.choices[0].text !== undefined) {
-        responseLength = response.data.choices[0].text.length;
+    setError(undefined);
+    try {
+      let submission = input;
+      if (continueRequest !== undefined) {
+        submission = continueRequest;
       }
-      const thisQuery = {
-        timestamp: dateTime,
-        query: input,
-        response: removeLeadingNewlines(response.data.choices[0].text),
-        model: getModelShortName(options.model),
-        temperature: options.temperature / 100,
-        maxTokens: options.maxTokens,
-        frequencyPenalty: options.frequencyPenalty,
-        presencePenalty: options.presencePenalty,
-        stopReason: response.data.choices[0].finish_reason,
-        maxCost: getMaxCost(options.model, options.maxTokens),
-        estimatedCost: getEstimatedCost(
-          options.model,
-          input.length + responseLength / 4
-        ),
-      };
-      setOutput([thisQuery, ...output]);
+      const response = await getAi(
+        submission,
+        key,
+        options.model,
+        Number(options.temperature / 100),
+        Number(options.maxTokens),
+        Number(options.frequencyPenalty),
+        Number(options.presencePenalty)
+      );
+
+      // block necessary for cost estimate
+      let responseLength = 0;
+      if (response.data.choices !== undefined) {
+        if (response.data.choices[0].text !== undefined) {
+          responseLength = response.data.choices[0].text.length;
+        }
+
+        const thisQuery = {
+          timestamp: dateTime,
+          query: submission,
+          response: removeLeadingNewlines(response.data.choices[0].text),
+          model: getModelShortName(options.model),
+          temperature: options.temperature / 100,
+          maxTokens: options.maxTokens,
+          frequencyPenalty: options.frequencyPenalty,
+          presencePenalty: options.presencePenalty,
+          stopReason: response.data.choices[0].finish_reason,
+          maxCost: getMaxCost(options.model, options.maxTokens),
+          estimatedCost: getEstimatedCost(
+            options.model,
+            input.length + responseLength / 4
+          ),
+        };
+        setOutput([thisQuery, ...output]);
+      }
+    } catch (e) {
+      if (e instanceof Error) {
+        if (e.message === 'Request failed with status code 401') {
+          setError(
+            'OpenAI rejected the API Key and did not return a submission.'
+          );
+        } else {
+          setError(
+            'Unable to contact OpenAI. Check your internet connection and browser settings.'
+          );
+        }
+      }
     }
     setIsLoading(false);
   };
@@ -96,6 +120,7 @@ const useAiRequest = () => {
     handleOptions,
     output,
     isLoading,
+    error,
     handleSubmit,
     handleClearHistory,
     handleRemoveHistoryItem,

@@ -4,6 +4,9 @@ const removeLeadingNewlines = (text: string | undefined) => {
       text = text?.slice(2);
     }
   }
+  if (text !== undefined && text.length === 0) {
+    text = '* The AI returned nothing to this query *';
+  }
 
   return text;
 };
