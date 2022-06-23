@@ -1,6 +1,6 @@
 type HistoryEntry = {
   timestamp: Date;
-  query: string;
+  prompt: string;
   response: string | undefined;
   model: string;
   temperature: number;

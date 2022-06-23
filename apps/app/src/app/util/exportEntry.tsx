@@ -13,8 +13,8 @@ Single Entry
 ==================== GENERATED  ====================
 ${instance.timestamp}
 
-====================   QUERY    ====================
-${instance.query}
+====================   PROMPT   ====================
+${instance.prompt}
 
 ====================  RESPONSE  ====================
 ${instance.response}

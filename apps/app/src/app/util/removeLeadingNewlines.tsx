@@ -5,7 +5,7 @@ const removeLeadingNewlines = (text: string | undefined) => {
     }
   }
   if (text !== undefined && text.length === 0) {
-    text = '* The AI returned nothing to this query *';
+    text = '* The AI returned nothing to this prompt. *';
   }
 
   return text;

@@ -24,11 +24,11 @@ const History: FC<Props> = ({
             {output.length - index}
           </div>
           <div className="timestamp">{instance.timestamp.toLocaleString()}</div>
-          <div className="query">
-            <div className="heading" id="query-heading">
-              Query
+          <div className="prompt">
+            <div className="heading" id="prompt-heading">
+              Prompt
             </div>
-            {instance.query}
+            {instance.prompt}
           </div>
           <div className="response">
             <div className="heading" id="response-heading">
@@ -81,7 +81,7 @@ const History: FC<Props> = ({
                 <td className="heading">Estimated Tokens</td>
                 <td>
                   {instance.response !== undefined &&
-                    instance.query.length + instance.response.length / 4}
+                    instance.prompt.length + instance.response.length / 4}
                 </td>
               </tr>
               <tr>
@@ -99,7 +99,7 @@ const History: FC<Props> = ({
               id="request-continuation-button"
               disabled={isLoading}
               onClick={() =>
-                handleSubmit(`${instance.query}\n\n${instance.response}`)
+                handleSubmit(`${instance.prompt}\n\n${instance.response}`)
               }
             >
               Request Continuation

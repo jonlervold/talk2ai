@@ -32,7 +32,7 @@ const Card = styled.div`
   .timestamp {
     margin-top: 1rem;
   }
-  .query {
+  .prompt {
     margin-top: 1rem;
     white-space: pre-line;
   }
@@ -43,7 +43,7 @@ const Card = styled.div`
   #card-number {
     font-size: 1.25rem;
   }
-  #query-heading {
+  #prompt-heading {
     margin-bottom: 1rem;
   }
   #response-heading {

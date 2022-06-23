@@ -66,9 +66,9 @@ const useAiRequest = () => {
           responseLength = response.data.choices[0].text.length;
         }
 
-        const thisQuery = {
+        const thisPrompt = {
           timestamp: dateTime,
-          query: submission,
+          prompt: submission,
           response: removeLeadingNewlines(response.data.choices[0].text),
           model: getModelShortName(options.model),
           temperature: options.temperature / 100,
@@ -82,7 +82,7 @@ const useAiRequest = () => {
             input.length + responseLength / 4
           ),
         };
-        setOutput([thisQuery, ...output]);
+        setOutput([thisPrompt, ...output]);
       }
     } catch (e) {
       if (e instanceof Error) {
