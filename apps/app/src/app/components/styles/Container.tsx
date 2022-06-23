@@ -6,16 +6,29 @@ const Container = styled.div`
   textarea,
   button {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    resize: none;
   }
   button {
     width: 50%;
+    min-height: 2rem;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid black;
+    background-color: #e4e4e4;
+  }
+  button:hover {
+    background-color: #9191fc;
+  }
+  button:hover:disabled {
+    background-color: #e4e4e4;
+  }
+  button:active {
+    background-color: #6f6fc2;
   }
   textarea {
     box-sizing: border-box;
     border: 1px solid black;
-    background-color: #e4e4e4;
+    background-color: #ffffff;
     margin: 1rem;
     margin-left: auto;
     margin-right: auto;
@@ -23,8 +36,21 @@ const Container = styled.div`
     height: 3in;
     padding: 1rem;
   }
+  a {
+    color: black;
+  }
+  a:hover {
+    color: #6f6fc2;
+  }
+  a:active {
+    color: #6161a5;
+  }
   .heading {
     font-weight: bold;
+  }
+  .error-message {
+    margin-bottom: 1rem;
+    color: #8f0000;
   }
   #page-title {
     font-size: 2.5rem;
@@ -35,9 +61,13 @@ const Container = styled.div`
   #key-field {
     width: 30%;
     text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  #help-toggle {
+    margin-top: 1rem;
   }
   #options-visibility-toggle {
-    margin-top: 1rem;
+    margin-top: 0.33rem;
   }
   #options-hidden {
     visibility: hidden;
@@ -47,15 +77,17 @@ const Container = styled.div`
     //
   }
   #clear-input-button {
-    margin-bottom: 0.33rem;
+    margin-top: 0.33rem;
   }
   #export-history-button {
     margin-bottom: 0.33rem;
   }
+  #footer {
+    margin: 1rem;
+  }
   #disclaimer {
     font-size: 0.7rem;
     width: 80%;
-    margin-top: 1rem;
     margin-bottom: 1rem;
     margin-left: auto;
     margin-right: auto;

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 
 const OptionsWrapper = styled.div`
-  background-color: #e4e4e4;
+  background-color: #f5f5f5;
   display: inline-block;
   width: 90%;
   margin-top: 1rem;
@@ -15,6 +15,15 @@ const OptionsWrapper = styled.div`
   }
   input {
     width: 50%;
+  }
+  table {
+    margin-top: 1rem;
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  td {
+    border: 1px solid black;
+    padding: 0.5rem;
   }
   #option-descriptions-toggle {
     width: 55.4%;
