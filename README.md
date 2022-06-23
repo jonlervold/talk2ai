@@ -6,9 +6,9 @@ Usage requires an account with OpenAI. One can be created on their site. https:/
 
 ### Running the App
 
-Clone repo
-Run <code>npm install</code>
-Run <code>nx serve app</code>
+1. Clone repo
+2. Run <code>npm install</code>
+3. Run <code>nx serve app</code>
 
 ### Steps for Use
 
