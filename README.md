@@ -1,4 +1,4 @@
-#Talk2AI
+# Talk2AI
 
 Talk2AI is an interface for creating prompts and receiving responses to those prompts from OpenAI's GPT-3.
 
