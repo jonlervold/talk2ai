@@ -133,7 +133,6 @@ export function App() {
         no affiliation with, and is not endorsed by, OpenAI, OpenAI LP, nor
         OpenAI Inc.
       </div>
-      {/* <div>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</div> */}
     </Container>
   );
 }
