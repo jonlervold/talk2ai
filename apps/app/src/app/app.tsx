@@ -18,7 +18,7 @@ export function App() {
     handleKey,
     options,
     handleOptions,
-    output,
+    history,
     isLoading,
     error,
     handleSubmit,
@@ -90,15 +90,15 @@ export function App() {
         </button>
       </div>
       <History
-        output={output}
+        history={history}
         isLoading={isLoading}
         handleSubmit={handleSubmit}
         handleRemoveHistoryItem={handleRemoveHistoryItem}
       />
-      {output.length > 0 && (
+      {history.length > 0 && (
         <div>
           <button
-            onClick={() => exportFullHistory(output)}
+            onClick={() => exportFullHistory(history)}
             id="export-history-button"
           >
             Export All Entries
@@ -106,7 +106,7 @@ export function App() {
         </div>
       )}
       <div>
-        {output.length > 0 && (
+        {history.length > 0 && (
           <button onClick={handleClearHistory}>Clear History</button>
         )}
       </div>

@@ -4,24 +4,24 @@ import exportEntry from '../util/exportEntry';
 import Card from './styles/Card';
 
 type Props = {
-  output: HistoryEntry[];
+  history: HistoryEntry[];
   isLoading: boolean;
   handleSubmit: (continueRequest?: string | undefined) => Promise<void>;
   handleRemoveHistoryItem: (index: number) => void;
 };
 
 const History: FC<Props> = ({
-  output,
+  history,
   isLoading,
   handleSubmit,
   handleRemoveHistoryItem,
 }) => {
   return (
     <>
-      {output.map((instance: HistoryEntry, index: number) => (
+      {history.map((instance: HistoryEntry, index: number) => (
         <Card>
           <div id="card-number" className="heading">
-            {output.length - index}
+            {history.length - index}
           </div>
           <div className="timestamp">{instance.timestamp.toLocaleString()}</div>
           <div className="prompt">

@@ -20,7 +20,7 @@ const useAiRequest = () => {
     setKey(e.currentTarget.value);
   };
 
-  const [output, setOutput] = useState<HistoryEntry[]>([]);
+  const [history, setHistory] = useState<HistoryEntry[]>([]);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -82,7 +82,7 @@ const useAiRequest = () => {
             input.length + responseLength / 4
           ),
         };
-        setOutput([thisPrompt, ...output]);
+        setHistory([thisPrompt, ...history]);
       }
     } catch (e) {
       if (e instanceof Error) {
@@ -101,13 +101,13 @@ const useAiRequest = () => {
   };
 
   const handleClearHistory = () => {
-    setOutput([]);
+    setHistory([]);
   };
 
   const handleRemoveHistoryItem = (index: number) => {
-    const newOutput = [...output];
-    newOutput.splice(index, 1);
-    setOutput(newOutput);
+    const newHistory = [...history];
+    newHistory.splice(index, 1);
+    setHistory(newHistory);
   };
 
   return {
@@ -118,7 +118,7 @@ const useAiRequest = () => {
     handleKey,
     options,
     handleOptions,
-    output,
+    history,
     isLoading,
     error,
     handleSubmit,
