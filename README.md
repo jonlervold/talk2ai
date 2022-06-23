@@ -4,6 +4,14 @@ Talk2AI is an interface for creating prompts and receiving responses to those pr
 
 Usage requires an account with OpenAI. One can be created on their site. https://openai.com/api/
 
+The advantages of using this app over the OpenAI's provided playground are:
+
+1. History of the user's entries throughout the session, including the settings used for that entry, and a delete button for removing unwanted responses.
+2. A max cost calculator based on input settings for those who have upgraded beyond the free trial, and an estimated cost calculator for each entry based on the return. The history logs these costs with each entry as well.
+3. Simple exports of individual entries or the entire session history to text files.
+4. Easy continuation of previous entries without needing to copy/paste.
+5. Significantly easier use on mobile!
+
 ### Running the App
 
 1. Clone repo
