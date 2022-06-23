@@ -19,8 +19,15 @@ const Help: FC = () => {
       <h4>Steps for Use</h4>
       <ol>
         <li>
-          Once signed in, click the colored circle on the top right of the page
-          with the first letter of your name.
+          Sign in to{' '}
+          <a href="https://openai.com/api" target="_blank" rel="noreferrer">
+            openai.com/api
+          </a>
+          .
+        </li>
+        <li>
+          Click the colored circle on the top right of the page with the first
+          letter of your name.
         </li>
         <li>In the dropdown menu, click "View API Keys."</li>
         <li>On this page, under the "Secret Key" header, click "copy."</li>
