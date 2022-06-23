@@ -16,15 +16,6 @@ const Container = styled.div`
     border: 1px solid black;
     background-color: #e4e4e4;
   }
-  // query disables sticky hover on mobile
-  @media (hover: hover) {
-    button:hover {
-      background-color: #9191fc;
-    }
-  }
-  button:hover:disabled {
-    background-color: #e4e4e4;
-  }
   button:active {
     background-color: #6f6fc2;
   }
