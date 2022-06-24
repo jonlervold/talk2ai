@@ -10,6 +10,7 @@ const Card = styled.div`
   margin-left: auto;
   margin-right: auto;
   text-align: left;
+  word-wrap: break-word;
   table {
     background-color: #e4e4e4;
     table-layout: fixed;
