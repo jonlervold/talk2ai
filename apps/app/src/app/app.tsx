@@ -74,7 +74,7 @@ export function App() {
           onClick={() => handleSubmit()}
         >
           {key.length === 0
-            ? 'Enter Access Key to Submit'
+            ? 'Enter API Key to Submit'
             : isLoading
             ? 'Loading...'
             : 'Submit'}

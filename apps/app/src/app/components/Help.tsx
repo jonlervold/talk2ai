@@ -74,13 +74,6 @@ const Help: FC = () => {
         </a>
         .
       </p>
-      <p>
-        Talk2AI was created by{' '}
-        <a href="https://jonlervold.com" target="_blank" rel="noreferrer">
-          Jon Lervold
-        </a>{' '}
-        in 2022.
-      </p>
     </Card>
   );
 };
