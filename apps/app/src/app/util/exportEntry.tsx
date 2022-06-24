@@ -1,9 +1,9 @@
 import HistoryEntry from '../types/HistoryEntry';
 
 const exportEntry = (instance: HistoryEntry) => {
-  const filename = `talk2ai-export-entry-${instance.timestamp.getFullYear()}-${
+  const filename = `talk2ai_export-entry_${instance.timestamp.getFullYear()}-${
     instance.timestamp.getMonth() + 1
-  }-${instance.timestamp.getDate()}.txt`;
+  }-${instance.timestamp.getDate()}_${instance.timestamp.getHours()}-${instance.timestamp.getMinutes()}-${instance.timestamp.getSeconds()}.txt`;
 
   const outputString = `Export from Talk2AI
 https://jonlervold.com/talk2ai
