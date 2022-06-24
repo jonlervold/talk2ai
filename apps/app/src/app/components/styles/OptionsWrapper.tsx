@@ -8,23 +8,6 @@ const OptionsWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   border: 1px solid black;
-  select {
-    text-align: center;
-    width: 50%;
-    height: 1.5rem;
-  }
-  input {
-    width: 50%;
-  }
-  table {
-    margin-top: 1rem;
-    border: 1px solid black;
-    border-collapse: collapse;
-  }
-  td {
-    border: 1px solid black;
-    padding: 0.5rem;
-  }
   #option-descriptions-toggle {
     width: 55.4%;
     margin: 1rem;

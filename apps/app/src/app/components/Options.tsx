@@ -22,6 +22,10 @@ const Options: FC<Props> = ({
   showOptionDescriptions,
   handleShowOptionDescriptions,
 }) => {
+  let widenWhenDescriptionsVisible = '';
+  if (showOptionDescriptions) {
+    widenWhenDescriptionsVisible = '90%';
+  }
   return (
     <OptionsWrapper>
       <div>
@@ -55,7 +59,7 @@ const Options: FC<Props> = ({
         </span>
 
         {showOptionDescriptions && (
-          <span>
+          <div className="option-description">
             <table>
               <tr>
                 <td className="heading">Name</td>
@@ -89,10 +93,10 @@ const Options: FC<Props> = ({
                 <td>Simple classification, address correction, keywords</td>
               </tr>
             </table>
-          </span>
+          </div>
         )}
       </Option>
-      <Option>
+      <Option style={{ width: widenWhenDescriptionsVisible }}>
         <span className="heading">Temperature</span>
 
         <span>
@@ -105,17 +109,17 @@ const Options: FC<Props> = ({
           />
         </span>
 
-        <span>{options.temperature / 100}</span>
+        <span className="slider-number">{options.temperature / 100}</span>
 
         {showOptionDescriptions && (
-          <span>
+          <div className="option-description">
             Higher values means the model will take more risks. Try 0.9 for more
             creative applications, and 0 (argmax sampling) for ones with a
             well-defined answer.
-          </span>
+          </div>
         )}
       </Option>
-      <Option>
+      <Option style={{ width: widenWhenDescriptionsVisible }}>
         <span className="heading">Frequency Penalty</span>
 
         <span>
@@ -128,17 +132,17 @@ const Options: FC<Props> = ({
           />
         </span>
 
-        <span>{options.frequencyPenalty}</span>
+        <span className="slider-number">{options.frequencyPenalty}</span>
 
         {showOptionDescriptions && (
-          <span>
+          <div className="option-description">
             Number between -2.0 and 2.0. Positive values penalize new tokens
             based on their existing frequency in the text so far, decreasing the
             model's likelihood to repeat the same line verbatim.
-          </span>
+          </div>
         )}
       </Option>
-      <Option>
+      <Option style={{ width: widenWhenDescriptionsVisible }}>
         <span className="heading">Presence Penalty</span>
         <span>
           <input
@@ -149,16 +153,16 @@ const Options: FC<Props> = ({
             max="2"
           />
         </span>
-        <span>{options.presencePenalty}</span>{' '}
+        <span className="slider-number">{options.presencePenalty}</span>{' '}
         {showOptionDescriptions && (
-          <span>
+          <div className="option-description">
             Number between -2.0 and 2.0. Positive values penalize new tokens
             based on whether they appear in the text so far, increasing the
             model's likelihood to talk about new topics.
-          </span>
+          </div>
         )}
       </Option>
-      <Option>
+      <Option style={{ width: widenWhenDescriptionsVisible }}>
         <span className="heading">Max Tokens / Max Cost*</span>
 
         <span>
@@ -171,20 +175,20 @@ const Options: FC<Props> = ({
           />
         </span>
 
-        <span>
+        <span className="slider-number">
           {options.maxTokens} / ~$
           {getMaxCost(options.model, options.maxTokens)}
         </span>
 
         {showOptionDescriptions && (
-          <span>
+          <div className="option-description">
             Prices are per 1,000 tokens. You can think of tokens as pieces of
             words, where 1,000 tokens is about 750 words. You can think of
             tokens as pieces of words used for natural language processing. For
             English text, 1 token is approximately 4 characters or 0.75 words.
             As a point of reference, the collected works of Shakespeare are
             about 900,000 words or 1.2M tokens.
-          </span>
+          </div>
         )}
       </Option>
     </OptionsWrapper>
